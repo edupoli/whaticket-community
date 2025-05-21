@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Op } from "sequelize";
 import * as Yup from "yup";
 import AppError from "../../errors/AppError";
@@ -59,7 +60,7 @@ const UpdateQueueService = async (
 
   try {
     await queueSchema.validate({ color, name });
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 

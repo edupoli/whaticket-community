@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 
 import AppError from "../../errors/AppError";
@@ -46,7 +47,7 @@ const CreateWhatsAppService = async ({
 
   try {
     await schema.validate({ name, status, isDefault });
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 

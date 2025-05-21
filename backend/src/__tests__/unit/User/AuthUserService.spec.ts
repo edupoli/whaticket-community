@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import faker from "faker";
 import AppError from "../../../errors/AppError";
 import AuthUserService from "../../../services/UserServices/AuthUserService";
@@ -41,7 +42,7 @@ describe("Auth", () => {
         email: faker.internet.email(),
         password: faker.internet.password()
       });
-    } catch (err) {
+    } catch (err: any) {
       expect(err).toBeInstanceOf(AppError);
       expect(err.statusCode).toBe(401);
       expect(err.message).toBe("ERR_INVALID_CREDENTIALS");
@@ -60,7 +61,7 @@ describe("Auth", () => {
         email: "mail@test.com",
         password: faker.internet.password()
       });
-    } catch (err) {
+    } catch (err: any) {
       expect(err).toBeInstanceOf(AppError);
       expect(err.statusCode).toBe(401);
       expect(err.message).toBe("ERR_INVALID_CREDENTIALS");

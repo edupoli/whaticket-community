@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 import { Request, Response } from "express";
 import { getIO } from "../libs/socket";
@@ -8,7 +9,7 @@ import ShowContactService from "../services/ContactServices/ShowContactService";
 import UpdateContactService from "../services/ContactServices/UpdateContactService";
 import DeleteContactService from "../services/ContactServices/DeleteContactService";
 
-import CheckContactNumber from "../services/WbotServices/CheckNumber"
+import CheckContactNumber from "../services/WbotServices/CheckNumber";
 import CheckIsValidContact from "../services/WbotServices/CheckIsValidContact";
 import GetProfilePicUrl from "../services/WbotServices/GetProfilePicUrl";
 import AppError from "../errors/AppError";
@@ -46,7 +47,10 @@ export const index = async (req: Request, res: Response): Promise<Response> => {
   return res.json({ contacts, count, hasMore });
 };
 
-export const getContact = async (req: Request, res: Response): Promise<Response> => {
+export const getContact = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const { name, number } = req.body as IndexGetContactQuery;
 
   const contact = await GetContactService({
@@ -70,19 +74,19 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
 
   try {
     await schema.validate(newContact);
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 
   await CheckIsValidContact(newContact.number);
-  const validNumber : any = await CheckContactNumber(newContact.number)
-  
+  const validNumber: any = await CheckContactNumber(newContact.number);
+
   const profilePicUrl = await GetProfilePicUrl(validNumber);
 
-  let name = newContact.name
-  let number = validNumber
-  let email = newContact.email
-  let extraInfo = newContact.extraInfo
+  const { name } = newContact;
+  const number = validNumber;
+  const { email } = newContact;
+  const { extraInfo } = newContact;
 
   const contact = await CreateContactService({
     name,
@@ -125,7 +129,7 @@ export const update = async (
 
   try {
     await schema.validate(contactData);
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 

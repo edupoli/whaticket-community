@@ -1,5 +1,6 @@
 FROM node:14-alpine as build-deps
 WORKDIR /usr/src/app
+ENV NODE_OPTIONS=--openssl-legacy-provider
 COPY package*.json ./
 RUN npm install
 COPY .env* ./

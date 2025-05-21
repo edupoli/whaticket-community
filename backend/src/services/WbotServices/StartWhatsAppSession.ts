@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { initWbot } from "../../libs/wbot";
 import Whatsapp from "../../models/Whatsapp";
 import { wbotMessageListener } from "./wbotMessageListener";
@@ -20,7 +21,7 @@ export const StartWhatsAppSession = async (
     const wbot = await initWbot(whatsapp);
     wbotMessageListener(wbot);
     wbotMonitor(wbot, whatsapp);
-  } catch (err) {
+  } catch (err: any) {
     logger.error(err);
   }
 };

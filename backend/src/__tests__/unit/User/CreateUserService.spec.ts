@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import faker from "faker";
 import AppError from "../../../errors/AppError";
 import CreateUserService from "../../../services/UserServices/CreateUserService";
@@ -39,7 +40,7 @@ describe("User", () => {
         email: "teste@sameemail.com",
         password: faker.internet.password()
       });
-    } catch (err) {
+    } catch (err: any) {
       expect(err).toBeInstanceOf(AppError);
       expect(err.statusCode).toBe(400);
     }

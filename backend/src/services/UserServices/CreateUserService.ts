@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 
 import AppError from "../../errors/AppError";
@@ -49,7 +50,7 @@ const CreateUserService = async ({
 
   try {
     await schema.validate({ email, password, name });
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 
@@ -59,7 +60,7 @@ const CreateUserService = async ({
       password,
       name,
       profile,
-      whatsappId: whatsappId ? whatsappId : null
+      whatsappId: whatsappId || null
     },
     { include: ["queues", "whatsapp"] }
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 
 import AppError from "../../errors/AppError";
@@ -38,11 +39,18 @@ const UpdateUserService = async ({
     password: Yup.string()
   });
 
-  const { email, password, profile, name, queueIds = [], whatsappId } = userData;
+  const {
+    email,
+    password,
+    profile,
+    name,
+    queueIds = [],
+    whatsappId
+  } = userData;
 
   try {
     await schema.validate({ email, password, profile, name });
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 
@@ -51,7 +59,7 @@ const UpdateUserService = async ({
     password,
     profile,
     name,
-    whatsappId: whatsappId ? whatsappId : null
+    whatsappId: whatsappId || null
   });
 
   await user.$set("queues", queueIds);

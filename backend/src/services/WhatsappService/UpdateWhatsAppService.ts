@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 import { Op } from "sequelize";
 
@@ -48,7 +49,7 @@ const UpdateWhatsAppService = async ({
 
   try {
     await schema.validate({ name, status, isDefault });
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 

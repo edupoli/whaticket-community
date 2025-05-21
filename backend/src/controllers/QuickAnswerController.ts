@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Yup from "yup";
 import { Request, Response } from "express";
 import { getIO } from "../libs/socket";
@@ -41,7 +42,7 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
 
   try {
     await QuickAnswerSchema.validate(newQuickAnswer);
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 
@@ -79,7 +80,7 @@ export const update = async (
 
   try {
     await schema.validate(quickAnswerData);
-  } catch (err) {
+  } catch (err: any) {
     throw new AppError(err.message);
   }
 
