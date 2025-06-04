@@ -1,6 +1,5 @@
 import { Dialog } from "@material-ui/core";
 import React, { useState } from "react";
-
 import { GithubPicker } from "react-color";
 
 const ColorPicker = ({ onChange, currentColor, handleClose, open }) => {
@@ -61,16 +60,24 @@ const ColorPicker = ({ onChange, currentColor, handleClose, open }) => {
 
   const handleChange = (color) => {
     setSelectedColor(color.hex);
+    onChange(color.hex); // Moved here to update immediately on selection
     handleClose();
   };
 
   return (
     <Dialog
       onClose={handleClose}
-      aria-labelledby="simple-dialog-title"
+      aria-labelledby="color-picker-dialog"
       open={open}
       maxWidth="xs"
-      paperFullWidth
+      fullWidth // Replaced paperFullWidth with the correct prop
+      PaperProps={{
+        style: {
+          width: "100%",
+          padding: "16px", // Added some padding
+          overflow: "visible", // Ensures color picker isn't clipped
+        },
+      }}
     >
       <GithubPicker
         width={"100%"}
@@ -78,7 +85,6 @@ const ColorPicker = ({ onChange, currentColor, handleClose, open }) => {
         color={selectedColor}
         colors={colors}
         onChange={handleChange}
-        onChangeComplete={(color) => onChange(color.hex)}
       />
     </Dialog>
   );

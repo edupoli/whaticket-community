@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     border: "none",
     borderRadius: 30,
-    color: theme.palette.text.primary, 
+    color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.default,
   },
   badge: {
@@ -243,6 +243,7 @@ const TicketsManager = () => {
                 className={classes.badge}
                 badgeContent={openCount}
                 color="primary"
+                overlap="rectangular"
               >
                 {i18n.t("ticketsList.assignedHeader")}
               </Badge>
@@ -255,6 +256,7 @@ const TicketsManager = () => {
                 className={classes.badge}
                 badgeContent={pendingCount}
                 color="secondary"
+                overlap="rectangular"
               >
                 {i18n.t("ticketsList.pendingHeader")}
               </Badge>
